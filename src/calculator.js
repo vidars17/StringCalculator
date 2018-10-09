@@ -3,12 +3,22 @@ function Add(numbers) {
     return 0;
   }
 
-  else if(numbers.includes(",")){
-    var numbersArr = numbers.split(",");
+  else if(numbers.includes(",") || numbers.includes("\n")){
+
     var results = 0;
-    for(var i = 0; i < numbersArr.length; i++){
-      results += parseInt(numbersArr[i]);
+    if(numbers.includes(",")){
+      var numbersArr = numbers.split(/[,]/);
+      for(var i = 0; i < numbersArr.length; i++){
+        results += parseInt(numbersArr[i]);
+      }
     }
+    else if(numbers.includes("\n")) {
+      var numbersArr = numbers.split(/[\n]/);
+      for(var i = 0; i < numbersArr.length; i++){
+        results += parseInt(numbersArr[i]);
+      }
+    }
+
     return results;
   }
 
