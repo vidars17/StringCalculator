@@ -19,3 +19,11 @@ it("Should return sum of numbers if more than one.", () => {
 it("Should treat newline as a comma.", () => {
   expect(add("17 \n 63")).toBe(80);
 });
+
+it("Should accept both newline and comma as a seperator.", () => {
+  expect(add("5, 5, 17 \n 63")).toBe(90);
+});
+
+it("Should accept both newline and comma as a seperator.", () => {
+  expect(add("5, 5, 17 \n 63 \n 10")).toBe(100);
+});

@@ -6,7 +6,15 @@ function Add(numbers) {
   else if(numbers.includes(",") || numbers.includes("\n")){
 
     var results = 0;
-    if(numbers.includes(",")){
+    if(numbers.includes(",") && numbers.includes("\n")){
+      var regex = /[\n]/g;
+      var fixedString = numbers.replace(regex, ",")
+      var numbersArr = fixedString.split(/[,]/);
+      for(var i = 0; i < numbersArr.length; i++){
+        results += parseInt(numbersArr[i]);
+      }
+    }
+    else if(numbers.includes(",")){
       var numbersArr = numbers.split(/[,]/);
       for(var i = 0; i < numbersArr.length; i++){
         results += parseInt(numbersArr[i]);
