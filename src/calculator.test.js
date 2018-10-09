@@ -27,3 +27,7 @@ it("Should accept both newline and comma as a seperator.", () => {
 it("Should accept both newline and comma as a seperator.", () => {
   expect(add("5, 5, 17 \n 63 \n 10")).toBe(100);
 });
+
+it("Should accept both newline and comma as a seperator.", () => {
+  expect(add("5,20 \n5, 5, 17 \n 63 \n 10")).toBe(125);
+});
