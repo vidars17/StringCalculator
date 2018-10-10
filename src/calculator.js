@@ -7,6 +7,19 @@ function IsNegative(number){ //Helper function to check for negative numbers.
 }
 
 
+function CheckForNegativeVal(numbers){
+  if(numbers.some(IsNegative)){
+    var errorString = "";
+    for(var i = 0; i < numbers.length; i++){
+      if(numbers[i] < 0){
+        errorString += ", " + numbers[i];
+      }
+    }
+    throw new Error("String cannot contain negative values" + errorString);
+  }
+}
+
+
 function Add(numbers) {
   var results = 0;
   if(numbers == "") {
@@ -17,15 +30,7 @@ function Add(numbers) {
     var regex = /[\n]/g;
     var fixedString = numbers.replace(regex, ",")
     var numbersArr = fixedString.split(/[,]/);
-    if(numbersArr.some(IsNegative)){
-      var errorString = "";
-      for(var i = 0; i < numbersArr.length; i++){
-        if(numbersArr[i] < 0){
-          errorString += ", " + numbersArr[i];
-        }
-      }
-      throw new Error("String cannot contain negative values" + errorString);
-    }
+    CheckForNegativeVal(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
@@ -34,6 +39,7 @@ function Add(numbers) {
 
   else if(numbers.includes(",")){
     var numbersArr = numbers.split(/[,]/);
+    CheckForNegativeVal(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
@@ -42,6 +48,7 @@ function Add(numbers) {
 
   else if(numbers.includes("\n")) {
     var numbersArr = numbers.split(/[\n]/);
+    CheckForNegativeVal(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
