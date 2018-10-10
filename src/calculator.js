@@ -71,7 +71,7 @@ function Add(numbers) {
     return results;
   }
 
-  else if(numbers.includes(",")){
+  else if(numbers.includes(",")){ //As an afterthought after completing the assignment this could've been the only function splitting if I'd have used replace() like in the first if statement.
     var numbersArr = numbers.split(/[,]/);
     CheckForNegativeVal(numbersArr);
     numbersArr = CheckForBigNumbers(numbersArr);
