@@ -55,3 +55,7 @@ test("Should throw error if string contains negative number (single number).", (
     add("-5");
   }).toThrow("String cannot contain negative values, -5");
 });
+
+it("Should accept both newline and comma as a seperator.", () => {
+  expect(add("5,20 \n5, 1001, 17 \n 63 \n 10")).toBe(120);
+});

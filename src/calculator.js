@@ -6,6 +6,12 @@ function IsNegative(number){ //Helper function to check for negative numbers.
   return false;
 }
 
+function TooBig(number){
+  if(number < 1000){
+    return true;
+  }
+  return false;
+}
 
 function CheckForNegativeVal(numbers){
   var number = parseInt(numbers);
@@ -35,6 +41,13 @@ function Add(numbers) {
     var fixedString = numbers.replace(regex, ",")
     var numbersArr = fixedString.split(/[,]/);
     CheckForNegativeVal(numbersArr);
+    if(numbersArr.some(TooBig)){
+      for(var i = 0; i < numbersArr.length; i++){
+        if(numbersArr[i] > 1000){
+          numbersArr[i] = 0;
+        }
+      }
+    }
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
