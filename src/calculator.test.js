@@ -85,3 +85,7 @@ it("Should accept a new delimiter/separator (Commas).", () => {
 it("Should accept a new delimiter/separator (Newlines).", () => {
   expect(add("//;5\n20 ;5; 1001\n 17;63\n10")).toBe(120);
 });
+
+it("Should accept a new delimiter/separator (Testing with V).", () => {
+  expect(add("//V5\n20 V5V 1001\n 17V63\n10")).toBe(120);
+});

@@ -47,15 +47,17 @@ function CheckForBigNumbers(numbers){
 function Add(numbers) {
   var results = 0;
   var newDelimiter;
-  if(numbers.includes("//")){
-    newDelimiter = numbers[2];
-    var regex = new RegExp(newDelimiter, 'g');
-    numbers = numbers.replace(regex, ",");
-    numbers = numbers.replace("//", "0");
+  if(numbers.includes("//")){ //Checks for slashes denoting new delimiter.
+    newDelimiter = numbers[2]; //Takes new delimiter.
+    var regex = new RegExp(newDelimiter, 'g'); //Creates new regular expression with the delimiter.
+    numbers = numbers.replace(regex, ","); //Replaces delimitor with commas that we know how to deal with.
+    numbers = numbers.replace("//", "0"); //Replaces indicators with 0 so the don't cause problems.
   }
+
   if(numbers == "") {
     return results;
   }
+
   else if(numbers.includes(",") && numbers.includes("\n")){ //Commas and newlines.
     var newline = "\n"
     var regex = new RegExp(newline, 'g'); //Regex for any number newlines.
