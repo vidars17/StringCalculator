@@ -31,3 +31,9 @@ it("Should accept both newline and comma as a seperator.", () => {
 it("Should accept both newline and comma as a seperator.", () => {
   expect(add("5,20 \n5, 5, 17 \n 63 \n 10")).toBe(125);
 });
+
+test("Should throw error if string contains negative number.", () => {
+  expect(() => {
+    add("-5,20 \n-5, 5, 17 \n 63 \n 10");
+  }).toThrow("String cannot contain negative values, -5, -5");
+});
