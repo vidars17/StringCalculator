@@ -6,21 +6,21 @@ function IsNegative(number){ //Helper function to check for negative numbers.
   return false;
 }
 
-function TooBig(number){
+function TooBig(number){ //Helper function that checks size of number.
   if(number < 1000){
     return true;
   }
   return false;
 }
 
-function CheckForNegativeVal(numbers){
+function CheckForNegativeVal(numbers){ //Function checks for negative numbers and throws an error with the nubers if found.
   var number = parseInt(numbers);
   if(typeof numbers == "string" && number < 0){
     throw new Error("String cannot contain negative values, " + number);
   }
   else if(Array.isArray(numbers) && numbers.some(IsNegative)){
-    var errorString = "";
-    for(var i = 0; i < numbers.length; i++){
+    var errorString = ""; //Holds the negative numbers.
+    for(var i = 0; i < numbers.length; i++){ //Checks all numbers.
       if(numbers[i] < 0){
         errorString += ", " + numbers[i];
       }
@@ -29,6 +29,20 @@ function CheckForNegativeVal(numbers){
   }
 }
 
+function CheckForBigNumbers(numbers){
+  var number = parseInt(numbers);
+  if(typeof numbers == "string" && number > 1000){
+    return 0;
+  }
+  else if(Array.isArray(numbers) && numbers.some(TooBig)){ //Check if number is over 1000.
+    for(var i = 0; i < numbers.length; i++){
+      if(numbers[i] > 1000){
+        numbers[i] = 0; //Replace all n > 1000 with 0 since it doesn't affect calculations.
+      }
+    }
+  }
+  return numbers;
+}
 
 function Add(numbers) {
   var results = 0;
@@ -36,18 +50,12 @@ function Add(numbers) {
     return results;
   }
 
-  else if(numbers.includes(",") && numbers.includes("\n")){
-    var regex = /[\n]/g;
-    var fixedString = numbers.replace(regex, ",")
-    var numbersArr = fixedString.split(/[,]/);
+  else if(numbers.includes(",") && numbers.includes("\n")){ //Commas and newlines.
+    var regex = /[\n]/g; //Regex for any number newlines.
+    var fixedString = numbers.replace(regex, ",") //Replace all newlines with commas.
+    var numbersArr = fixedString.split(/[,]/); //Now we can split like we used to.
     CheckForNegativeVal(numbersArr);
-    if(numbersArr.some(TooBig)){
-      for(var i = 0; i < numbersArr.length; i++){
-        if(numbersArr[i] > 1000){
-          numbersArr[i] = 0;
-        }
-      }
-    }
+    numbersArr = CheckForBigNumbers(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
@@ -57,6 +65,7 @@ function Add(numbers) {
   else if(numbers.includes(",")){
     var numbersArr = numbers.split(/[,]/);
     CheckForNegativeVal(numbersArr);
+    numbersArr = CheckForBigNumbers(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
@@ -66,6 +75,7 @@ function Add(numbers) {
   else if(numbers.includes("\n")) {
     var numbersArr = numbers.split(/[\n]/);
     CheckForNegativeVal(numbersArr);
+    numbersArr = CheckForBigNumbers(numbersArr);
     for(var i = 0; i < numbersArr.length; i++){
       results += parseInt(numbersArr[i]);
     }
@@ -74,6 +84,7 @@ function Add(numbers) {
 
   else{
     CheckForNegativeVal(numbers);
+    numbers = CheckForBigNumbers(numbers);
     return parseInt(numbers);
   }
 }
