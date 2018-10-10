@@ -46,12 +46,19 @@ function CheckForBigNumbers(numbers){
 
 function Add(numbers) {
   var results = 0;
+  var newDelimiter;
+  if(numbers.includes("//")){
+    newDelimiter = numbers[2];
+    var regex = new RegExp(newDelimiter, 'g');
+    numbers = numbers.replace(regex, ",");
+    numbers = numbers.replace("//", "0");
+  }
   if(numbers == "") {
     return results;
   }
-
   else if(numbers.includes(",") && numbers.includes("\n")){ //Commas and newlines.
-    var regex = /[\n]/g; //Regex for any number newlines.
+    var newline = "\n"
+    var regex = new RegExp(newline, 'g'); //Regex for any number newlines.
     var fixedString = numbers.replace(regex, ",") //Replace all newlines with commas.
     var numbersArr = fixedString.split(/[,]/); //Now we can split like we used to.
     CheckForNegativeVal(numbersArr);

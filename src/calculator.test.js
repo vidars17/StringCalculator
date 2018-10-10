@@ -20,15 +20,15 @@ it("Should treat newline as a comma.", () => {
   expect(add("17 \n 63")).toBe(80);
 });
 
-it("Should accept both newline and comma as a seperator.", () => {
+it("Should accept both newline and comma as a separator.", () => {
   expect(add("5, 5, 17 \n 63")).toBe(90);
 });
 
-it("Should accept both newline and comma as a seperator.", () => {
+it("Should accept both newline and comma as a separator.", () => {
   expect(add("5, 5, 17 \n 63 \n 10")).toBe(100);
 });
 
-it("Should accept both newline and comma as a seperator.", () => {
+it("Should accept both newline and comma as a separator.", () => {
   expect(add("5,20 \n5, 5, 17 \n 63 \n 10")).toBe(125);
 });
 
@@ -70,4 +70,18 @@ it("Should not accept n > 1000 (Newlines).", () => {
 
 it("Should not accept n > 1000 (Single input).", () => {
   expect(add("14654")).toBe(0);
+});
+
+it("Should accept a new delimiter/separator (Commas and newlines).", () => {
+  expect(add("//;5,20 \n5; 1001, 17;63\n10")).toBe(120);
+});
+
+
+it("Should accept a new delimiter/separator (Commas).", () => {
+  expect(add("//;5;20 ,5; 1001; 17,63,10")).toBe(120);
+});
+
+
+it("Should accept a new delimiter/separator (Newlines).", () => {
+  expect(add("//;5\n20 ;5; 1001\n 17;63\n10")).toBe(120);
 });
