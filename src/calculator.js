@@ -8,7 +8,11 @@ function IsNegative(number){ //Helper function to check for negative numbers.
 
 
 function CheckForNegativeVal(numbers){
-  if(numbers.some(IsNegative)){
+  var number = parseInt(numbers);
+  if(typeof numbers == "string" && number < 0){
+    throw new Error("String cannot contain negative values, " + number);
+  }
+  else if(Array.isArray(numbers) && numbers.some(IsNegative)){
     var errorString = "";
     for(var i = 0; i < numbers.length; i++){
       if(numbers[i] < 0){
@@ -56,6 +60,7 @@ function Add(numbers) {
   }
 
   else{
+    CheckForNegativeVal(numbers);
     return parseInt(numbers);
   }
 }

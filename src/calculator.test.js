@@ -38,14 +38,20 @@ test("Should throw error if string contains negative number.", () => {
   }).toThrow("String cannot contain negative values, -5, -5");
 });
 
-test("Should throw error if string contains negative number(newlines).", () => {
+test("Should throw error if string contains negative number (newlines).", () => {
   expect(() => {
     add("-5 \n 63 \n 10");
   }).toThrow("String cannot contain negative values, -5");
 });
 
-test("Should throw error if string contains negative number(commas).", () => {
+test("Should throw error if string contains negative number (commas).", () => {
   expect(() => {
     add("-5, 20,-6,-100");
   }).toThrow("String cannot contain negative values, -5, -6, -100");
+});
+
+test("Should throw error if string contains negative number (single number).", () => {
+  expect(() => {
+    add("-5");
+  }).toThrow("String cannot contain negative values, -5");
 });
