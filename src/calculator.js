@@ -53,15 +53,17 @@ function Add(numbers) {
     numbers = numbers.replace(regex, ","); //Replaces delimitor with commas that we know how to deal with.
     numbers = numbers.replace("//", "0"); //Replaces indicators with 0 so the don't cause problems.
   }
-
+  if(numbers.includes("\n")){
+    var newline = "\n"
+    var regex = new RegExp(newline, 'g'); //Regex for any number newlines.
+    numbers = numbers.replace(regex, ",") //Replace all newlines with commas.
+  }
   if(numbers == "") {
     return results;
   }
-
+  /*
   else if(numbers.includes(",") && numbers.includes("\n")){ //Commas and newlines.
-    var newline = "\n"
-    var regex = new RegExp(newline, 'g'); //Regex for any number newlines.
-    var fixedString = numbers.replace(regex, ",") //Replace all newlines with commas.
+
     var numbersArr = fixedString.split(/[,]/); //Now we can split like we used to.
     CheckForNegativeVal(numbersArr);
     numbersArr = CheckForBigNumbers(numbersArr);
@@ -70,7 +72,7 @@ function Add(numbers) {
     }
     return results;
   }
-
+*/
   else if(numbers.includes(",")){ //As an afterthought after completing the assignment this could've been the only function splitting if I'd have used replace() like in the first if statement.
     var numbersArr = numbers.split(/[,]/);
     CheckForNegativeVal(numbersArr);
@@ -80,7 +82,7 @@ function Add(numbers) {
     }
     return results;
   }
-
+/*
   else if(numbers.includes("\n")) {
     var numbersArr = numbers.split(/[\n]/);
     CheckForNegativeVal(numbersArr);
@@ -90,7 +92,7 @@ function Add(numbers) {
     }
     return results;
   }
-
+*/
   else{
     CheckForNegativeVal(numbers);
     numbers = CheckForBigNumbers(numbers);
